@@ -1,0 +1,21 @@
+<h2>All the celebrities</h2>
+
+<ul>
+
+  {{#each allCelebrities}}
+
+    <li>
+      <ul>
+        <li>
+
+          <p>{{this.name}}</p>
+          <p>{{this.occupation}}</p>
+          <p>{{this.catchPhrase}}</p>
+
+        </li>
+      </ul>
+    </li>
+
+  {{/each}}
+
+</ul>
