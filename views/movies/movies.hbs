@@ -8,14 +8,13 @@
       <ul>
         <li>
 
-          <p>{{this.title}}</p>
-          {{!-- <p>{{this.genre}}</p>
-          <p>{{this.plot}}</p>
-          <p>{{this.cast}}</p> --}}
-          <a href="/movies/{{this._id}}">details</a>
+          <a href="/movies/{{this.id}}"> {{this.title}}</a>
+
         </li>
       </ul>
     </li>
+
+    <a href="/movies/{{this._id}}/edit">Edit</a>
 
   {{/each}}
 

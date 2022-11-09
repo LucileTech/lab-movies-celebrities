@@ -27,7 +27,8 @@ router.post("/movies/create", async (req, res, next) => {
 
 router.get("/movies", async (req, res, next) => {
   try {
-    const allMovies = await Movie.find();
+    const allMovies = await Movie.find().populate("cast");
+    console.log(allMovies);
     res.render("movies/movies.hbs", { allMovies });
   } catch (error) {
     next(error);
@@ -35,11 +36,41 @@ router.get("/movies", async (req, res, next) => {
 });
 
 router.get("/movies/:id", async (req, res, next) => {
-  // Iteration #4: Update the drone
-  // ... your code here Show a form to update a drone
   try {
-    const myMovie = await Movie.findById(req.params.id).populate("casts");
-    res.render("/movies/movie-details.hbs", { myMovie });
+    const myMovie = await Movie.findById(req.params.id).populate("cast");
+    // console.log(myMovie);
+    res.render("movies/movie-details.hbs", { myMovie });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/movies/:id/delete", async (req, res, next) => {
+  try {
+    await Movie.findByIdAndDelete(req.params.id);
+    res.redirect("/movies");
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/movies/:id/edit", async (req, res, next) => {
+  try {
+    const editMovie = await Movie.findById(req.params.id);
+    const editCelebrity = await Celebrity.find();
+    // console.log(myMovie);
+    res.render("movies/edit-movie.hbs", { editMovie, editCelebrity });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/movies/:id", async (req, res, next) => {
+  try {
+    await Movie.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.redirect("/movies");
   } catch (error) {
     next(error);
   }

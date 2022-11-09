@@ -1,25 +1,31 @@
 <ul>
 
-  {{#each myMovie}}
+  {{!-- {{#each myMovie}} --}}
 
-    <li>
-      <p>{{this.title}}</p>
-      <p>{{this.genre}}</p>
-      <p>{{this.plot}}</p>
-      <ul>
-        {{#each this.cast}}
-          <li>
+  <li>
+    <p>Titre : {{myMovie.title}}</p>
+    <p>Genre : {{myMovie.genre}}</p>
+    <p>Plot : {{myMovie.plot}}</p>
 
-            <p>{{this.name}}</p>
-            <p>{{this.occupation}}</p>
-            <p>{{this.catchPhrase}}</p>
+    {{#each myMovie.cast}}
+      <p>Cast name : {{this.name}}</p>
+      <p>Cast occupation : {{this.occupation}}</p>
+      <p>Cast catch phrase : {{this.catchPhrase}}</p>
+    {{/each}}
+  </li>
 
-          </li>
+  <form action="/movies/{{myMovie._id}}/delete" method="post">
+    <button>Delete</button>
+  </form>
 
-        {{/each}}
-      </ul>
-    </li>
+  {{!-- <form action="/movies/{{myMovie._id}}/edit" method="post">
+    <button>Edit</button>
+  </form> --}}
 
-  {{/each}}
+  <a href="/movies/{{myMovie._id}}/edit">Edit</a>
+
+  {{!-- <a href="/movies/{{this._id}}/delete">tentative a : delete</a> --}}
+
+  {{!-- {{/each}} --}}
 
 </ul>
